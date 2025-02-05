@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('brokers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('creci');
-            $table->string('cpf');
+            $table->string('creci', 8);
+            $table->string('cpf', 11);
             $table->timestamps();
         });
     }
