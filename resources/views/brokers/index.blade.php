@@ -10,7 +10,12 @@
     <h1>Bem vindo ao Cadastro de Corretores</h1>
     <h2>Cadastrar Corretor</h2>
 
-    <form action="/brokers" method="POST"></form>
+    @if (isset($broker))
+    <form action="{{ route('brokers.update'), $broker->id }}" method="POST">
+    @method('PUT')
+    @else
+    <form action="{{ route('brokers.store') }}" method="POST">
+    @endif
         @csrf
         <label for="name">Nome</label>
         <input type="text" name="name" id="name">
@@ -22,5 +27,30 @@
         <input type="text" name="cpf" id="cpf">
         <br>
         <button type="submit">Enviar</button>
+        <a href="">Enviar</a>
+    </form>
+
+    <h2>Corretores Cadastrados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Creci</th>
+                <th>CPF</th>
+                <th>opções</th>
+            </tr>
+        </thead>
+
+        @foreach($brokers as $broker)
+            <tbody>
+                <tr>
+                    <td>{{ $broker->name }}</td>
+                    <td>{{ $broker->creci }}</td>
+                    <td>{{ $broker->cpf }}</td>
+                    <td>editar</td>
+                </tr>
+            </tbody>
+        @endforeach
+    </table>
 </body>
 </html>
